@@ -2,8 +2,11 @@ import json
 import pandas as pd
 
 class FewShotPosts:
-    def __init__(self,file_path = "data\processed_posts.json"):
-        self.df= None
+    def __init__(self, file_path=None):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, "data", "processed_posts.json")
+
+        self.df = None
         self.unique_tags = None
         self.load_posts(file_path)
     
