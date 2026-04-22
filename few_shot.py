@@ -14,6 +14,15 @@ class FewShotPosts:
     def load_posts(self,file_path):
         with open(file_path,encoding='utf-8',errors='ignore') as f:
             posts = json.load(f)
+        def clean_text(obj):
+            if isinstance(obj, str):
+               return obj.encode("utf-8", "ignore").decode("utf-8")
+            elif isinstance(obj, list):
+               return [clean_text(i) for i in obj]
+            elif isinstance(obj, dict):
+               return {k: clean_text(v) for k, v in obj.items()}
+            return obj
+            posts = clean_text(posts)
             self.df = pd.json_normalize(posts)
             self.df["length"] = self.df["line_count"].apply(self.categorize_length)
             all_tags = self.df['tags'].apply(lambda x:x).sum()
