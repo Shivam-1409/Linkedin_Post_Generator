@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+import os
 
 class FewShotPosts:
     def __init__(self, file_path=None):
