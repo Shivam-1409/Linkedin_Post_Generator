@@ -6,7 +6,7 @@ from llm_helper import llm
 
 
 def process_post(raw_file_path,processed_file_path = "data/processed_posts.json"):
-    with open(raw_file_path,encoding='utf-8') as file:
+    with open(raw_file_path,encoding='utf-8',error='ignore') as file:
          enriched_post = []
          posts = json.load(file)
          for post in posts:
