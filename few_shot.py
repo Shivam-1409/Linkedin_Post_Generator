@@ -22,11 +22,11 @@ class FewShotPosts:
             elif isinstance(obj, dict):
                return {k: clean_text(v) for k, v in obj.items()}
             return obj
-            posts = clean_text(posts)
-            self.df = pd.json_normalize(posts)
-            self.df["length"] = self.df["line_count"].apply(self.categorize_length)
-            all_tags = self.df['tags'].apply(lambda x:x).sum()
-            self.unique_tags = set(list(all_tags))
+        posts = clean_text(posts)
+        self.df = pd.json_normalize(posts)
+        self.df["length"] = self.df["line_count"].apply(self.categorize_length)
+        all_tags = self.df['tags'].apply(lambda x:x).sum()
+        self.unique_tags = set(list(all_tags))
 
     def categorize_length(self,line_count):
         if line_count < 5:
